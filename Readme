@@ -1,0 +1,29 @@
+=============================================================================
+SOLUTION OF SCHRODINGER'S EQUATION IN 2D USING THE BOUNDARY ELEMENT METHOD
+=============================================================================
+
+This program allows one to calculate densities of states and photoemiession
+intensities for electrons confined to a plane and bound by barriers within
+regions of potential and effective mass that can be defined by the user
+as needed. This program is well suited to deal with surface states in
+surfaces like Cu(111), Au(111), etc. decorated with steps, molecules,
+adatoms, etc., and with electrons in 2D in general. It can also find
+application in solving Maxwell's equations in a 2D geometry (with
+translational invariance along the z direction) for E polarization along z.
+
+
+The files provided with this distribution are the following:
+
+ebem.cpp   source code
+bin/       axiliary routines used in ebem.cpp (matrices, Bessel functs., etc.)
+examples/  examples of use of the ebem.cpp
+Readme     this file
+
+The source code is self-contained and it can be compiled with the command
+
+             g++ -O3 ebem.cpp -o ebem
+
+using gnu C++ compiler to generate the executable file ebem. The source code
+is standard C++, so it can be compiled with any standard C++ compiler.
+
+=============================================================================

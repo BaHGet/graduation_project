@@ -1,0 +1,13 @@
+=============================================================================
+
+   Sub-set of JGA program library:
+
+   algebra.h     input algebra
+   bessel.h      Bessel functions (J, Y, K, and I)
+   complex.h     complex numbers
+   eispack.h     diagonalization of arbitrary complex square matrices
+   jga.h         some basic definitions, pi, etc
+   lattice.h     2D (surface) lattices (reciprocal vectors, etc.)
+   matrix.h      matrix algebra
+
+=============================================================================

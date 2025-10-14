@@ -1,0 +1,14 @@
+Assumptions
+
+add-arc-boundary m1 m2 x0 y0 x1 y1 galph th0 th1 n
+
+m1, m2 : Regions on either side of boundary
+x0, y0, x1, y1 : Fragment of the arch
+x0 shift up, x0 shift right, x1 shift down, y1 shift left, 
+
+galph : ??
+th0 : start angle of drewing (ex: a circle will start from 0)
+th1 : end angle of drewing (ex: a circle will end at 360)
+n : Number of points in each fragment in the arc
+
+-- diffrent between a and b will make the shape of boundary dots more like an ellipse than a circle
