@@ -1,5 +1,5 @@
-// hexagonl lattice
-//  xre = yre ,  phi = 60
+// square lattice
+//  xre = yre ,  phi = 90
 
 eV=1/27.2113834
 AA=1/0.529177208
@@ -24,9 +24,9 @@ y=-0.5*yre*sin(theta_R)
 
 add-arc-boundary m2 m1 0*AA 0*AA a b 0 0 360 n
 
-repeat-periodic-geometry 1*xre 1*yre 0 60 150
-write-geometry data/hexagon_lattice_geo.dat
-//write-regions 250 data/hexagon_lattice_reg.dat
+repeat-periodic-geometry 1*xre 1*yre 0 90 150
+write-geometry data/square_geo.dat
+//write-regions 250 data/square_reg.dat
 end
 /// ||||||||||||||||||||||||||
 periodicity 0 0 xre yre 0 60 70 70

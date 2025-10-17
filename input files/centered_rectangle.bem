@@ -1,9 +1,12 @@
+// centered rectangle lattice
+//  xre != yre ,  phi = 90
+
 eV=1/27.2113834
 AA=1/0.529177208
 meff 0.41
 Ei 0.015*eV
 potential 1 0.0*eV      0  // potential outside circle.
-potential 2 0.7*eV      0  // potential inside circle.
+potential 2 0*eV      0  // potential inside circle.
 
 a=7*AA        // circle radius
 b=7*AA
@@ -13,24 +16,20 @@ m2=2
 theta_D=180 // unused
 theta_R=pi/3
 
-xre=25*AA        // superstructure period in X-D
-yre=1.5*xre        // superstructure period in Y-D
+xre=30*AA        // superstructure period in X-D
+yre=65*AA        // superstructure period in Y-D
 
-phi=acos(xre/(2*yre))
-phid=phi*(180/pi)
 x=-0.5*xre         //(x,y) periodicity origin
 y=-0.5*yre*sin(theta_R)
 
-add-arc-boundary m2 m1 0*AA 0*AA a a 0 0 360 n
+add-arc-boundary m2 m1 0*AA 0*AA a b 0 0 360 n
 
-repeat-periodic-geometry 1*xre 1*yre 0 70.5 150
+phi=acos(xre/(2*yre))*(180/pi)
 
-write-geometry data/centered_rectangle_lattice_geo.dat
-write-regions 200 data/centered_rectangle_lattice_reg.dat
-
-//repeat-periodic-geometry a1 a2 45 (180-phi_deg) 240
+repeat-periodic-geometry 1*xre 1*yre 0 phi 450
+write-geometry data/centered_rectangle_geo.dat
+//write-regions 250 data/centered_rectangle_reg.dat
 end
-
 /// ||||||||||||||||||||||||||
 periodicity 0 0 xre yre 0 60 70 70
 
@@ -39,8 +38,8 @@ qx0=0
 qy0=0
 qx1=0
 qy1=0.3
-//BANDS 7 qx0 qy0 qx1 qy1 150 0.4*eV BS_G-M.dat
-
+BANDS 7 qx0 qy0 qx1 qy1 150 0.4*eV BS_G-M.dat
+end
 ///// Band structure along Gamma-K /////
 qx0=0
 qy0=0
