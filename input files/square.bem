@@ -5,8 +5,8 @@ eV=1/27.2113834
 AA=1/0.529177208
 meff 0.41
 Ei 0.015*eV
-potential 1 0.0*eV      0  // potential outside circle.
-potential 2 0*eV      0  // potential inside circle.
+potential 1 0*eV      0  // potential outside circle.
+potential 2 0.7*eV      0  // potential inside circle.
 
 a=7*AA        // circle radius
 b=7*AA
@@ -25,30 +25,33 @@ y=-0.5*yre*sin(theta_R)
 add-arc-boundary m2 m1 0*AA 0*AA a b 0 0 360 n
 
 repeat-periodic-geometry 1*xre 1*yre 0 90 150
-write-geometry data/square_geo.dat
+//write-geometry data/square_geo.dat
 //write-regions 250 data/square_reg.dat
-end
+
 /// ||||||||||||||||||||||||||
 periodicity 0 0 xre yre 0 60 70 70
-
+/// |||||||||||||||||
 ///// Band structure along Gamma-M /////
 qx0=0
 qy0=0
 qx1=0
 qy1=0.3
-BANDS 7 qx0 qy0 qx1 qy1 150 0.4*eV BS_G-M.dat
-end
+
+BANDS 7 qx0 qy0 qx1 qy1 150 0.4*eV data/square_BS_G-M_7.dat
+/// ||||||||||||||||||||||
 ///// Band structure along Gamma-K /////
 qx0=0
 qy0=0
 qx1=0.3
 qy1=0.0
-//BANDS 7 qx0 qy0 qx1 qy1 150 0.4*eV BS_G-K.dat
 
+BANDS 7 qx0 qy0 qx1 qy1 150 0.4*eV data/square_BS_G-K_7.dat
+/// ||||||||||||||||||||||||
 ///// Band structure along Gamma-M-K-Gamma /////
 
-//BANDS-hexagonal 7 150 0.4*eV BS_GMKG.dat
+BANDS-hexagonal 7 150 0.4*eV data/square_BS_GMKG_7.dat
 
+end
 // Calculate PE intensities along the segment going from                 
       //(qx0,qy0) to (qx1,qy1) 
 
