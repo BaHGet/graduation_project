@@ -6,7 +6,7 @@ AA=1/0.529177208
 meff 0.41
 Ei 0.015*eV
 potential 1 0*eV      0  // potential outside circle.
-potential 2 0*eV      0  // potential inside circle.
+potential 2 0.7*eV      0  // potential inside circle.
 
 a=7*AA        // circle radius
 b=7*AA
@@ -31,33 +31,35 @@ repeat-periodic-geometry 1*xre 1*yre 0 60 150
 /// ||||||||||||||||||||||||||
 periodicity 0 0 xre yre 0 60 70 70
 
+nEnd=0.8*eV
+
 ///// Band structure along Gamma-M /////
 qx0=0
 qy0=0
 qx1=0
 qy1=0.3
-BANDS 7 qx0 qy0 qx1 qy1 150 0.4*eV data/hexagon_BS_G-M.dat
+//BANDS 7 qx0 qy0 qx1 qy1 150 nEnd data/hexa_m_7.dat
 
 ///// Band structure along Gamma-K /////
 qx0=0
 qy0=0
 qx1=0.3
 qy1=0.0
-BANDS 7 qx0 qy0 qx1 qy1 150 0.4*eV data//hexagon_BS_G-K.dat
+//BANDS 7 qx0 qy0 qx1 qy1 150 nEnd data/hexa_k_1.dat
 
 ///// Band structure along Gamma-M-K-Gamma /////
 
-BANDS-hexagonal 7 150 0.4*eV data/hexagon_BS_GMKG.dat
-end
+//BANDS-hexagonal 7 150 nEnd data/hexa_mk_1.dat
+
 // Calculate PE intensities along the segment going from                 
       //(qx0,qy0) to (qx1,qy1) 
 
-qx0=0
-qy0=-0.2/AA
+qx0=-0
+qy0=0.5/AA
 qx1=0
-qy1=0.2/AA
+qy1=-0.5/AA
 
-PE-qE-EPW 7 qx0 qy0 qx1 qy1 300 0.0*eV 0.25*eV 300 Hex_GM_PE.dat
+PE-qE-EPW 7 qx0 qy0 qx1 qy1 250 0.8*eV 0.0*eV 250 data/Hex_GM_PE.dat
 
 ///// Constant Energy Surface (CES) /////
 qx0=-1.5*(4*pi/(3*xre))
