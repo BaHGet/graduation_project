@@ -10,7 +10,7 @@ potential 2 0.7*eV      0  // potential inside circle.
 
 a=7*AA        // circle radius
 b=7*AA
-n=500
+n=50
 m1=1
 m2=2
 theta_D=180 // unused
@@ -24,12 +24,23 @@ yre=d        // superstructure period in Y-D
 x=-0.5*xre         //(x,y) periodicity origin
 y=-0.5*yre*sin(theta_R)
 
-add-arc-boundary m2 m1 0*AA 0*AA a b 0 0 360 n
+// triangle shaped potential barrier
+triangleSideLength=2*a*(pi/3^0.5)^0.5 // Triangle's Side Length 
+R=triangleSideLength/(3^0.5) // distance from triangle's center to any vertex
+ax=0
+ay=R
+bx=((3^0.5)/2)*R
+by=-0.5*R
+cx=-((3^0.5)/2)*R
+cy=-0.5*R
+add-polygon-boundary 3 m1 m2 ax ay bx by n cx cy n ax ay n
+
+//add-arc-boundary m1 m2 0*AA 0*AA a b 0 0 360 n
 
 repeat-periodic-geometry 1*xre 1*yre 0 60 150
-write-geometry data/hexagon_lattice_geo.dat
-//write-regions 350 data/hexagon_lattice_reg.dat
-end
+//write-geometry data/hexagon_lattice_triangle_geo.dat
+//write-regions 250 data/hexagon_lattice_triangle_reg.dat
+//end
 /// ||||||||||||||||||||||||||
 periodicity 0 0 xre yre 0 60 70 70
 
@@ -50,8 +61,8 @@ qy1=0.0
 //BANDS 7 qx0 qy0 qx1 qy1 150 nEnd data/hexa_k_1.dat
 
 ///// Band structure along Gamma-M-K-Gamma /////
-BANDS-hexagonal 7 500 0.8*eV data/hexa_mk_0-7.dat
-end
+//BANDS-hexagonal 7 500 1.0*eV data/hexa_tri_mk_0-7.dat
+//end
 // Calculate PE intensities along the segment going from                 
       //(qx0,qy0) to (qx1,qy1) 
 
@@ -87,10 +98,13 @@ black_point_x=(ax+bx+cx)/3
 black_point_y=-(ay+by+cy)/3
 
 //LDOS-rE-EPW 5 red_point_x red_point_y red_point_x red_point_y 1 0 0.7*eV 120 data/hex_LDOS_0-7_red_point.dat
+//LDOS-rE-EPW 5 black_point_x black_point_y black_point_x black_point_y 1 0 0.7*eV 120 data/hex_LDOS_0-7_black_point.dat
+//LDOS-rE-EPW 5 0 0 0 0 1 0 0.7*eV 120 data/hex_LDOS_0-7_center.dat
 
 
 //////////////2D_DOS_finite/////////////////
 
-//LDOS-xy-EPW  5 -10 -23  2.5*xre 2.5*xre  0.3176*eV 60 60  data/hex_LDOS_0-7_3176.dat
+LDOS-xy-EPW  5 -10 -23  2.5*xre 2.5*xre  0.145*eV 60 60  data/hex_LDOS_0-7_145.dat
+LDOS-xy-EPW  5 -10 -23  2.5*xre 2.5*xre  0.230*eV 60 60  data/hex_LDOS_0-7_230.dat
 
 end
