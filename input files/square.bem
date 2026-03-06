@@ -6,11 +6,11 @@ AA=1/0.529177208
 meff 0.41
 Ei 0.015*eV
 potential 1 0*eV      0  // potential outside circle.
-potential 2 0.1*eV      0  // potential inside circle.
+potential 2 0.7*eV      0  // potential inside circle.
 
-a=7*AA        // circle radius
-b=7*AA
-n=50
+a=10*AA        // circle radius
+b=10*AA
+n=800
 m1=1
 m2=2
 theta_D=180 // unused
@@ -27,8 +27,8 @@ phi=90
 add-arc-boundary m2 m1 0*AA 0*AA a b 0 0 360 n
 
 repeat-periodic-geometry 1*xre 1*yre 0 phi 150
-//write-geometry data/square_geo.dat
-//write-regions 250 data/square_reg.dat
+write-geometry final_data_sq/square_geo.dat
+write-regions 500 final_data_sq/square_reg.dat
 
 /// ||||||||||||||||||||||||||
 periodicity 0 0 xre yre 0 phi 70 70
@@ -42,7 +42,7 @@ qy0=0
 qx1=0
 qy1=0.3
 
-BANDS 7 qx0 qy0 qx1 qy1 150 nEnd data/sq_m_1.dat
+//BANDS 7 qx0 qy0 qx1 qy1 150 nEnd data/sq_m_1.dat
 /// ||||||||||||||||||||||
 ///// Band structure along Gamma-K /////
 qx0=0
@@ -50,12 +50,12 @@ qy0=0
 qx1=0.3
 qy1=0.0
 
-BANDS 7 qx0 qy0 qx1 qy1 150 nEnd data/sq_K_1.dat
+//BANDS 7 qx0 qy0 qx1 qy1 150 nEnd data/sq_K_1.dat
 /// ||||||||||||||||||||||||
-///// Band structure along Gamma-M-K-Gamma /////
+///// Band structure along Gamma-X-K-Gamma /////
 
-BANDS-square 7 150 nEnd data/sq_mk_1.dat
-end
+BANDS-square 7 800 nEnd final_data_sq/sq_xk.dat
+
 // Calculate PE intensities along the segment going from                 
       //(qx0,qy0) to (qx1,qy1) 
 
@@ -64,8 +64,8 @@ qy0=0.5/AA
 qx1=0
 qy1=-0.5/AA
 
-//PE-qE-EPW 7 qx0 qy0 qx1 qy1 250 0.8*eV 0.0*eV 250 data/SQ_GM_PE.dat
-end
+//PE-qE-EPW 7 qx0 qy0 qx1 qy1 250 0.8*eV 0.0*eV 250 final_data_sq/SQ_GM_PE.dat
+
 ///////////////////////////////////////
 ///// Constant Energy Surface (CES) /////
 qx0=-1.5*(4*pi/(3*xre))
@@ -73,11 +73,16 @@ qy0=qx0
 dqx=-2*qx0
 dqy=-2*qy0
 
-//PE-qxqy-EPW 7 qx0 qy0 dqx dqy 0.12*eV 100 100 CES_120meV.dat
-
+PE-qxqy-EPW 7 qx0 qy0 dqx dqy 0.11*eV 400 400 final_data_sq/sq_CES_110.dat
+PE-qxqy-EPW 7 qx0 qy0 dqx dqy 0.13*eV 400 400 final_data_sq/sq_CES_130.dat
+PE-qxqy-EPW 7 qx0 qy0 dqx dqy 0.17*eV 400 400 final_data_sq/sq_CES_170.dat
+PE-qxqy-EPW 7 qx0 qy0 dqx dqy 0.21*eV 400 400 final_data_sq/sq_CES_210.dat
+end
 //////////////LDOS at a point/////////////////
 
-//LDOS-rE-EPW 5 0 0 0 0 1 0 0.4*eV 120 hex_LDOS.dat
+LDOS-rE-EPW 5 0 0 0 0 1 0 0.4*eV 120 hex_LDOS.dat
+LDOS-rE-EPW 5 0 0 0 0 1 0 0.4*eV 120 hex_LDOS.dat
+LDOS-rE-EPW 5 0 0 0 0 1 0 0.4*eV 120 hex_LDOS.dat
 
 
 //////////////2D_DOS_finite/////////////////
