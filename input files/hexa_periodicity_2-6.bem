@@ -16,7 +16,7 @@ m2=2
 theta_D=180 // unused
 theta_R=pi/3
 
-d=30*AA
+d=26*AA
 
 xre=d        // superstructure period in X-D
 yre=d        // superstructure period in Y-D
@@ -27,9 +27,9 @@ y=-0.5*yre*sin(theta_R)
 add-arc-boundary m2 m1 0*AA 0*AA a b 0 0 360 n
 
 repeat-periodic-geometry 1*xre 1*yre 0 60 150
-write-geometry data/hexagon_lattice_geo.dat
+//write-geometry data/hexagon_lattice_geo.dat
 //write-regions 350 data/hexagon_lattice_reg.dat
-end
+//end
 /// ||||||||||||||||||||||||||
 periodicity 0 0 xre yre 0 60 70 70
 
@@ -50,7 +50,7 @@ qy1=0.0
 //BANDS 7 qx0 qy0 qx1 qy1 150 nEnd data/hexa_k_1.dat
 
 ///// Band structure along Gamma-M-K-Gamma /////
-BANDS-hexagonal 7 500 0.8*eV data/hexa_mk_0-7.dat
+BANDS-hexagonal 7 500 0.8*eV data/hexa_mk_0-7_2-6nm.dat
 end
 // Calculate PE intensities along the segment going from                 
       //(qx0,qy0) to (qx1,qy1) 

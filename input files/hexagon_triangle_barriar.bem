@@ -5,8 +5,8 @@ eV=1/27.2113834
 AA=1/0.529177208
 meff 0.41
 Ei 0.015*eV
-potential 1 0*eV      0  // potential outside circle.
-potential 2 0.7*eV      0  // potential inside circle.
+potential 2 0*eV      0  // potential outside circle.
+potential 1 0.7*eV      0  // potential inside circle.
 
 a=7*AA        // circle radius
 b=7*AA
@@ -24,12 +24,23 @@ yre=d        // superstructure period in Y-D
 x=-0.5*xre         //(x,y) periodicity origin
 y=-0.5*yre*sin(theta_R)
 
-add-arc-boundary m2 m1 0*AA 0*AA a b 0 0 360 n
+// triangle shaped potential barriar
+triangleSideLength=2*a*(pi/3^0.5)^0.5 // Triangle's Side Length 
+R=triangleSideLength/(3^0.5) // distance from triangle's center to any vertex
+ax=0
+ay=R
+bx=((3^0.5)/2)*R
+by=-0.5*R
+cx=-((3^0.5)/2)*R
+cy=-0.5*R
+add-polygon-boundary 3 m1 m2 ax ay bx by 100 cx cy 100 ax ay 100
+
+//add-arc-boundary m1 m2 0*AA 0*AA a b 0 0 360 n
 
 repeat-periodic-geometry 1*xre 1*yre 0 60 150
-write-geometry data/hexagon_lattice_geo.dat
-//write-regions 350 data/hexagon_lattice_reg.dat
-end
+write-geometry data/hexagon_lattice_triangle_geo.dat
+//write-regions 350 data/hexagon_lattice_triangle_reg.dat
+//end
 /// ||||||||||||||||||||||||||
 periodicity 0 0 xre yre 0 60 70 70
 
@@ -50,7 +61,7 @@ qy1=0.0
 //BANDS 7 qx0 qy0 qx1 qy1 150 nEnd data/hexa_k_1.dat
 
 ///// Band structure along Gamma-M-K-Gamma /////
-BANDS-hexagonal 7 500 0.8*eV data/hexa_mk_0-7.dat
+BANDS-hexagonal 7 500 1.0*eV data/hexa_tri_mk_0-7.dat
 end
 // Calculate PE intensities along the segment going from                 
       //(qx0,qy0) to (qx1,qy1) 
